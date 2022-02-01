@@ -99,8 +99,10 @@ const taskList = document.querySelector("#task-list");
 taskList.addEventListener("click", (event) => {
   if (event.target.classList.contains("done-button")) {
     const parentTask =
-      event.target.parentElement.parentElement.parentElement.parentElement;
+      event.target.parentElement.parentElement.parentElement;
+      console.log(parentTask);
     const taskId = Number(parentTask.dataset.taskId);
+    console.log(taskId);
     const task = taskManager.getTaskById(taskId);
     console.log(task);
     task.status = "Done";

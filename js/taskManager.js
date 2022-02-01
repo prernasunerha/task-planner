@@ -1,6 +1,6 @@
 //task-7 Display The Tasks
-const createTaskHtml = (name, description, assignedTo, dueDate, status) => {
-    const html = `<li class="list-group-item">
+const createTaskHtml = (id, name, description, assignedTo, dueDate, status) => {
+    const html = `<li class="card" data-task-id="${id}" style="min-width: 50vw">
     <div class="card text-center">
         <div class="card-header text-primary font-weight-bold">${status}</div>
         <div class="card-body">
@@ -60,6 +60,7 @@ for (let i = 0; i < this.tasks.length; i++) {
     const date = new Date(task1.task.dueDate);
     const formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
     const taskHtml = createTaskHtml(
+      task1.task.id,
       task1.task.taskName,
       task1.task.description,
       task1.task.assignedTo,
