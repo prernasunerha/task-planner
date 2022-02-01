@@ -4,6 +4,10 @@ const form = document.querySelector("#addTaskForm");
 //task-6 Initialize a new TaskManager
 const taskManager = new TaskManager(0);
 
+ taskManager.load();
+ taskManager.render();
+
+
 //task-4 Task Form Input Validation
 form.addEventListener("submit", (event) => {
     //alert("Error");
@@ -89,6 +93,7 @@ form.addEventListener("submit", (event) => {
       } else {
         taskManager.addTask(taskName.value, status.value, validateAssignedTo.value, taskDescription.value, validateDueDate.value);
         clearFormFields();
+        taskManager.save();
         taskManager.render();
         
       }
@@ -106,6 +111,7 @@ taskList.addEventListener("click", (event) => {
     const task = taskManager.getTaskById(taskId);
     console.log(task);
     task.status = "Done";
+    taskManager.save();
     taskManager.render();
   }
 });

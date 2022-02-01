@@ -47,7 +47,7 @@ class TaskManager  {
             dueDate:dueDate,
             id: this.currentId++,
         };
-        this.tasks.push({task});
+        this.tasks.push(task);
     };
 
 
@@ -57,15 +57,15 @@ let tasksHtmlList = [];
 for (let i = 0; i < this.tasks.length; i++) {
     const task1 = this.tasks[i];
 
-    const date = new Date(task1.task.dueDate);
+    const date = new Date(task1.dueDate);
     const formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
     const taskHtml = createTaskHtml(
-      task1.task.id,
-      task1.task.taskName,
-      task1.task.description,
-      task1.task.assignedTo,
+      task1.id,
+      task1.taskName,
+      task1.description,
+      task1.assignedTo,
       formattedDate,
-      task1.task.status
+      task1.status
     );
     tasksHtmlList.push(taskHtml);
   }
@@ -73,6 +73,8 @@ for (let i = 0; i < this.tasks.length; i++) {
   const tasksList = document.querySelector("#task-list");
   tasksList.innerHTML = tasksHtml;
 }
+
+
 getTaskById(taskId) {
     let foundTask;
     for (let i = 0; i < this.tasks.length; i++) {
@@ -85,9 +87,23 @@ getTaskById(taskId) {
     console.log(foundTask);
     return foundTask; 
 }
+
+//task-9 Persisting Tasks to LocalStorage
+save() {
+    const tasksJson = JSON.stringify(this.tasks);
+    localStorage.setItem("tasks", tasksJson);
+    const currentId = String(this.currentId);
+    localStorage.setItem("currentId", currentId);
+  }
+
+load() {
+    if (localStorage.getItem("tasks")) {
+    const tasksJson = localStorage.getItem("tasks");
+    this.tasks = JSON.parse(tasksJson);
+    }
+    if (localStorage.getItem("currentId")) {
+    const currentId = localStorage.getItem("currentId");
+    this.currentId = Number(currentId);
+    }
 }
-
-
-
-
-
+}
