@@ -16,12 +16,14 @@ const createTaskHtml = (name, description, assignedTo, dueDate, status) => {
                     <div class="col text-muted">${assignedTo}</div>
                     <div class="col text-muted">${dueDate}</div>
                 </div>
+                
             </div>
             <br>
         </div>
         <div class="card-footer">
             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#editTask">Edit</button>  
             <button type="submit" class="btn btn-outline-danger">Delete</button>
+            <button class="btn btn-outline-success done-button">Done</button>
         </div>
     </div>
     </li>`;
@@ -70,7 +72,20 @@ for (let i = 0; i < this.tasks.length; i++) {
   const tasksList = document.querySelector("#task-list");
   tasksList.innerHTML = tasksHtml;
 }
+getTaskById(taskId) {
+    let foundTask;
+    for (let i = 0; i < this.tasks.length; i++) {
+    const task = this.tasks[i];
+    
+    if (task.task.id === taskId) {
+    foundTask = task.task;
+    }
+    }
+    console.log(foundTask);
+    return foundTask; 
 }
+}
+
 
 
 

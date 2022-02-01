@@ -2,7 +2,7 @@
 const form = document.querySelector("#addTaskForm");
 
 //task-6 Initialize a new TaskManager
-const task = new TaskManager(0);
+const taskManager = new TaskManager(0);
 
 //task-4 Task Form Input Validation
 form.addEventListener("submit", (event) => {
@@ -87,10 +87,25 @@ form.addEventListener("submit", (event) => {
         return;
 
       } else {
-        task.addTask(taskName.value, status.value, validateAssignedTo.value, taskDescription.value, validateDueDate.value);
+        taskManager.addTask(taskName.value, status.value, validateAssignedTo.value, taskDescription.value, validateDueDate.value);
         clearFormFields();
-        task.render();
+        taskManager.render();
+        
       }
+});
+
+//task-8 Update A Task
+const taskList = document.querySelector("#task-list");
+taskList.addEventListener("click", (event) => {
+  if (event.target.classList.contains("done-button")) {
+    const parentTask =
+      event.target.parentElement.parentElement.parentElement.parentElement;
+    const taskId = Number(parentTask.dataset.taskId);
+    const task = taskManager.getTaskById(taskId);
+    console.log(task);
+    task.status = "Done";
+    taskManager.render();
+  }
 });
 
 //task-5 Display the Current Date
