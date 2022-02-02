@@ -92,6 +92,7 @@ form.addEventListener("submit", (event) => {
 
       } else {
         taskManager.addTask(taskName.value, status.value, validateAssignedTo.value, taskDescription.value, validateDueDate.value);
+        
         clearFormFields();
         taskManager.save();
         taskManager.render();
@@ -114,7 +115,19 @@ taskList.addEventListener("click", (event) => {
     taskManager.save();
     taskManager.render();
   }
+  
+  if (event.target.classList.contains("delete-button")) {
+    const parentTask =
+      event.target.parentElement.parentElement.parentElement;
+      console.log(parentTask);
+    const taskId = Number(parentTask.dataset.taskId);
+    taskManager.deleteTask(taskId);
+    console.log(taskId)
+    taskManager.save();
+    taskManager.render();
+  }
 });
+
 
 //task-5 Display the Current Date
 const dateElement =document.querySelector("#date-element");

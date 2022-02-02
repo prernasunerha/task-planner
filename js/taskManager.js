@@ -22,7 +22,7 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, status) => {
         </div>
         <div class="card-footer">
             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#editTask">Edit</button>  
-            <button type="submit" class="btn btn-outline-danger">Delete</button>
+            <button class="btn btn-outline-danger delete-button">Delete</button>
             <button class="btn btn-outline-success done-button">Done</button>
         </div>
     </div>
@@ -80,11 +80,11 @@ getTaskById(taskId) {
     for (let i = 0; i < this.tasks.length; i++) {
     const task = this.tasks[i];
     
-    if (task.task.id === taskId) {
-    foundTask = task.task;
+    if (task.id === taskId) {
+    foundTask = task;
     }
     }
-    console.log(foundTask);
+    //console.log(foundTask);
     return foundTask; 
 }
 
@@ -106,4 +106,17 @@ load() {
     this.currentId = Number(currentId);
     }
 }
+//Task 10: Deleting Tasks
+deleteTask(taskId) {
+    console.log("delete task")
+    const newTasks = [];
+    for (let i = 0; i < this.tasks.length; i++) {
+    const task = this.tasks[i];
+    if (task.id !== taskId) {
+        newTasks.push(task);
+      }
+    }
+this.tasks = newTasks;
+  }
 }
+
